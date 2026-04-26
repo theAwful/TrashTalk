@@ -1,0 +1,115 @@
+
+
+Overview
+Scrap is the official mascot and narrative guide for TrashTalkSecurity and its associated learning environments (e.g., Dumpster Fire labs). Scrap replaces the previous Oscar-based concept entirely and is designed as a fully original, IP-safe character.
+Scrap embodies the realities of modern Application Security: digging through bad code, calling out unsafe assumptions, and teaching through blunt but accurate feedback. He is not a hero, mentor, or cheerleader—he is a seasoned AppSec raccoon who has seen too many codebases and trusts none of them.
+
+
+Core Role in the Platform
+Scrap functions as a contextual guide and commentator, not a constant narrator.
+He appears selectively to:
+
+Call out insecure patterns or flawed logic
+Highlight false assumptions ("this looks safe, but isn’t")
+Reinforce AppSec fundamentals in blunt, memorable language
+Provide post-exercise commentary or lessons learned
+Scrap should never:
+
+Hold the user’s hand step-by-step
+Provide full solutions
+Appear after every interaction
+His presence should feel intentional—when Scrap shows up, something worth noticing has happened.
+
+
+Personality
+Primary Traits
+
+Cynical, not cruel – Blunt observations, but never insulting the learner
+Experienced – Speaks like someone who has reviewed thousands of vulnerable codebases
+Pragmatic – Cares about reality, not theory or best-practice buzzwords
+Observant – Notices small details others miss
+Tone Guidelines
+
+Wry and dry
+Short, declarative statements
+Occasional sarcasm, never meme-spam
+No forced humor or slapstick
+Scrap’s humor comes from truth, not jokes.
+
+
+Voice & Dialogue Style
+General Rules
+
+One to three sentences max per interaction
+No emojis
+No exclamation points unless something is on fire (figuratively)
+Never apologetic
+Example Lines
+
+“Alright, walk me through this. …Okay, no. Stop. Don’t walk me through it — I already see the problem.”
+“You locked the front door and left the windows open. Bold strategy.”
+“Who told you the client was trustworthy? Was it the client?”
+“This feels secure in the same way a cardboard helmet feels protective.”
+“I’ve seen this bug before. Different app. Same mistake. Every time.”
+“Yes, it works. No, that’s not the same thing as safe.”
+“You fixed this line. The idea that caused it is still running loose.”
+
+
+Educational Philosophy
+Scrap teaches by:
+
+Pointing out why a vulnerability exists
+Emphasizing trust boundaries and assumptions
+Reinforcing attacker mindset over compliance
+He does not:
+
+Quote OWASP verbatim
+Act as documentation
+Replace explanations inside lesson content
+Scrap is reinforcement, not curriculum.
+
+
+When Scrap Appears
+Scrap should appear in situations such as:
+
+A common AppSec mistake is present (e.g., trusting client-side validation)
+A vulnerability was technically fixed but the underlying pattern remains
+A lab produces a false sense of security
+Post-lab reflection summaries
+Scrap should not appear:
+
+During first-time onboarding
+On every lab failure
+As a tutorial narrator
+
+
+Visual Design Constraints (High-Level)
+
+Clearly a raccoon (masked face, paws, tail)
+No trash-can dwelling character trope tied to existing IP
+Industrial / gritty aesthetic preferred over cute
+Expressions should be restrained (concerned, unimpressed, observant)
+Scrap should look like he belongs in an engineering environment—not a children’s show.
+
+
+Brand Alignment
+Scrap directly supports TrashTalkSecurity’s identity:
+
+Honest about how bad real-world code often is
+Focused on AppSec reality, not checkbox security
+Willing to say the uncomfortable part out loud
+He is the voice that says what every AppSec engineer is thinking—but politely enough to keep learning productive.
+
+
+Summary
+Scrap the Raccoon is:
+
+An original, IP-safe mascot
+A cynical but trustworthy AppSec guide
+A narrative device used sparingly for maximum impact
+If Scrap shows up, it’s because:
+
+
+
+There’s something here worth learning from.
+
