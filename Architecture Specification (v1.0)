@@ -1,0 +1,259 @@
+1. Architectural Goals
+The TrashTalkSecurity architecture is designed to:
+
+Support application security (AppSec) learning, not exploitation
+Emphasize code analysis, SAST-style reasoning, and remediation
+Remain simple to evolve as new labs and languages are added
+Demonstrate production-quality engineering practices (CI/CD, Kubernetes)
+Avoid premature complexity (e.g., microservices)
+
+Architecture choices intentionally favor clarity, modularity, and correctness over scale-for-scale’s-sake.
+
+2. Technology Choices
+Primary Programming Language
+Python
+Chosen because:
+
+Strong alignment with AppSec tooling and workflows
+Excellent support for static analysis, AST parsing, and rule evaluation
+Enables fast authoring of SAST-style labs and vulnerable examples
+Widely used by real-world AppSec teams for automation and triage
+
+Python is used for:
+
+Backend API
+Lab engine
+Grading and validation logic
+Vulnerable demo applications (where applicable)
+
+
+Backend Framework
+FastAPI
+Chosen because:
+
+Strong typing and clear contracts (OpenAPI)
+Clean separation between API and business logic
+Dependency injection suited for modular design
+Async-first where needed, without forcing it everywhere
+
+
+Data Store
+PostgreSQL
+Used for:
+
+User accounts
+Lab metadata
+Completion and progress tracking
+
+Relational storage is preferred for clarity and auditability.
+
+Infrastructure
+
+Docker – packaging
+Kubernetes – deployment and runtime orchestration
+CI/CD – automated build, test, and deploy
+Infrastructure-as-Code – reproducible environments
+
+Kubernetes exists to support the platform, not the learning content.
+
+3. High-Level Architecture Pattern
+✅ Modular Monolith (Authoritative Decision)
+The system is intentionally built as a modular monolith.
+This provides:
+
+Clear logical boundaries
+Single deployable artifact
+Easy reasoning and testing
+Low operational overhead
+Future-friendly refactoring (modules can later become services if needed)
+
+Microservices are explicitly out of scope for v1.
+
+4. Core System Components
+┌────────────────────┐
+│   Web UI (Client)  │
+└─────────┬──────────┘
+          │
+┌─────────▼──────────┐
+│   API Layer        │  (FastAPI)
+└─────────┬──────────┘
+          │
+────────────────────────────────────
+| Auth | Labs | Grading | Content | Users |
+────────────────────────────────────
+          │
+┌─────────▼──────────┐
+│   PostgreSQL       │
+└────────────────────┘
+
+Each block represents a logical module, not a separate service.
+
+5. Module Responsibilities
+5.1 Authentication Module
+
+User registration and login
+Password handling and session management
+Role enforcement (User / Admin)
+
+
+5.2 Lab Engine Module
+Core of the platform
+Responsibilities:
+
+Load lab definitions (labs-as-code)
+Provide context and artifacts (code, apps)
+Enforce lab constraints
+Coordinate grading
+
+Labs are treated as data + rules, not procedural code.
+
+5.3 Grading & Evaluation Module
+Responsible for:
+
+Validating user answers
+Rule-based reasoning checks
+Pattern and logic evaluation
+Returning structured feedback
+
+Key constraint:
+
+Labs are validated by reasoning and remediation correctness — never by exploit success.
+
+
+5.4 Content Module
+
+Stores and versions lab definitions
+Maps labs to OWASP / CWE categories
+Supports multiple languages per lab type over time
+
+Labs are versioned alongside application code.
+
+5.5 User & Progress Module
+
+Tracks completed labs
+Stores pass/fail state and results
+Optional scoring (non-competitive)
+
+
+6. Labs-as-Code Design
+Labs are defined declaratively and stored in-repo.
+Example structure:
+labs/
+  sast/
+    sql_injection_basic/
+      lab.yaml
+      vulnerable.py
+      secure.py
+  api/
+    broken_auth/
+      lab.yaml
+      app.py
+
+Each lab MUST define:
+
+Learning objective
+Vulnerable implementation
+Expected secure remediation
+Validation rules
+Guided explanations
+
+This enables:
+
+Peer review
+CI validation
+Easy contribution
+Zero runtime coupling
+
+
+7. Vulnerable Application Runtime (Controlled)
+Some labs may include runnable applications.
+Constraints:
+
+Minimal Flask or FastAPI apps
+Ephemeral lifecycle
+No persistence
+No external access
+Optional to complete the lab
+
+Understanding the code is more important than running the app.
+
+8. Deployment Architecture
+While learning is AppSec-focused, the platform itself demonstrates modern DevOps practices.
+
+Single monorepo
+CI pipeline:
+
+Platform tests
+Lab schema validation
+Static checks
+
+
+Kubernetes deployment:(this will be a v2 deployment, not a v1 focus at this moment in time, schedulued for later project date)
+
+API deployment
+Optional worker pods
+Ephemeral lab containers
+
+
+Automatic teardown of temporary resources
+
+
+9. Security Architecture Principles
+
+No real-world targets
+No exploit payload execution required
+Labs fully self-contained
+Strict isolation between sessions
+No long-lived secrets inside labs
+
+
+The platform teaches defense — it must embody defense.
+
+
+10. Non-Goals (Architectural)
+This architecture explicitly avoids:
+
+Microservice sprawl
+Asynchronous messaging systems (for v1)
+Distributed task queues
+Event sourcing
+Cloud misconfiguration labs
+
+If a feature increases architectural complexity without improving AppSec learning, it is rejected.
+
+11. Evolution Strategy
+Planned future enhancements:
+
+Additional programming languages for labs
+More advanced SAST reasoning scenarios
+Optional integration-style labs (CI feedback simulation)
+
+Architectural invariants must remain intact:
+
+AppSec-first
+Code-centric
+Reasoning-driven
+Modular design
+
+
+12. Source of Truth
+This document defines the authoritative architecture for TrashTalkSecurity v1.0.
+Any architectural changes require:
+
+Explicit update to this document
+Alignment with the project’s AppSec objectives
+
+
+Recommended Repo Layout
+/docs
+  ARCHITECTURE.md
+  SPEC.md
+  NON_GOALS.md
+/app
+/labs
+
+
+Closing Note
+TrashTalkSecurity is designed to reflect how real AppSec engineers think and work:
+reading code, questioning assumptions, judging exploitability, and guiding fixes.
+The architecture exists to support that learning, not overshadow it.
