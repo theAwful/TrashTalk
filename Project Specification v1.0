@@ -157,7 +157,7 @@ In Scope (v1)
 AppSec-focused code labs
 Vulnerable web/API labs
 Automated evaluation and feedback
-CI/CD and Kubernetes-based platform delivery
+CI/CD and Kubernetes-based platform delivery (k8s will be implemented in v2 to ease transition of app)
 
 Out of Scope (v1)
 
