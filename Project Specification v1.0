@@ -1,0 +1,217 @@
+1. Executive Summary & Objectives
+TrashTalkSecurity is an application security (AppSec) learning platform focused on secure coding, static analysis (SAST), and vulnerability reasoning.
+The platform provides hands-on labs where users analyze intentionally vulnerable code snippets and minimal web applications to identify, reason about, and remediate application-layer security flaws.
+Unlike traditional DAST or exploitation-focused labs (e.g., browser‑driven payload exercises), TrashTalkSecurity emphasizes code review, data flow analysis, exploitability judgment, and correct remediation—reflecting how AppSec work is performed in real-world engineering environments.
+Core Objectives
+
+Train AppSec engineers to identify and reason about vulnerabilities at the source code level
+Improve understanding of exploitability, impact, and secure remediation
+Provide structured AppSec learning without red-team exploitation workflows
+Demonstrate strong DevOps practices through the platform’s own infrastructure
+
+Target Audience
+
+Application Security Engineers
+Software Engineers learning secure coding
+Security-focused students and early-career professionals
+
+
+2. User Personas & Stories
+Persona: Application Security Engineer
+Needs to assess code findings, reduce false positives, and guide development teams.
+User Story
+
+As an AppSec engineer, I want to review vulnerable code and determine whether it is exploitable, why it matters, and how it should be fixed.
+
+
+Persona: Software Engineer
+Wants to understand why their code is insecure and how to correct it properly.
+User Story
+
+As a developer, I want to learn what makes a code pattern vulnerable and how to remediate it correctly.
+
+
+Persona: Student / Learner
+Needs guided, structured exposure to application security concepts.
+User Story
+
+As a learner, I want interactive practice reviewing vulnerable code with clear explanations and feedback.
+
+
+3. Functional Requirements
+3.1 Authentication & Access
+
+Username/password authentication
+Role separation:
+
+User – complete labs
+Admin – manage labs/content
+
+
+No external identity providers in v1
+
+
+3.2 AppSec Labs
+Labs are instructional, not adversarial.
+Lab Types (v1 Scope)
+
+SAST Code Review Labs
+
+Small, focused code snippets
+Multiple languages supported over time (e.g., Java, Python, JavaScript, Go)
+
+
+Vulnerable Web/API Labs
+
+Minimal applications designed for inspection and reasoning
+Focus on logic flaws, validation issues, auth/authz weaknesses
+
+
+
+Each lab includes:
+
+Context and assumptions
+Vulnerable code or application
+Guided questions
+Expected secure remediation
+
+
+3.3 TrashTalk Engine (Critique & Guidance)
+The TrashTalk engine provides:
+
+Structured security critique of insecure code
+Guided questions such as:
+
+Is this vulnerable?
+Under what conditions?
+What is the impact?
+How should it be fixed?
+
+
+Concise, professional feedback with light humor
+
+No exploit payloads are required to complete labs.
+
+3.4 Grading & Validation
+
+Rule-based validation of user responses
+Static pattern checks and logic assertions
+Pass/fail per question
+Clear explanation of correct vs incorrect answers
+
+
+3.5 Progress Tracking
+
+Lab completion tracking
+Per-lab pass/fail status
+Optional scoring (non-competitive)
+
+
+4. UI / UX Specifications
+Design Principles
+
+Code-first interface
+Minimal, distraction-free layout
+Clear separation between:
+
+Code
+Questions
+Feedback/explanations
+
+
+
+Key Views
+
+Dashboard: available labs, completion status
+Lab View: vulnerable code + context
+Question View: guided prompts
+Results View: reasoning and remediation explanation
+
+Mobile support is not required.
+
+5. Non-Functional Requirements
+Security
+
+No real-world targets
+No exploit chains or automated attacks
+Labs fully isolated and sandboxed
+No persistent credentials in lab environments
+
+Scalability
+
+Stateless application services
+Horizontal scaling for lab execution where applicable
+Automatic teardown of temporary resources
+
+Platform & Delivery
+
+Web-based application
+Kubernetes used for platform infrastructure
+CI/CD used for build, test, and deployment
+Infrastructure managed via Infrastructure-as-Code
+
+
+6. Project Scope & Timeline
+In Scope (v1)
+
+AppSec-focused code labs
+Vulnerable web/API labs
+Automated evaluation and feedback
+CI/CD and Kubernetes-based platform delivery
+
+Out of Scope (v1)
+
+Exploitation walkthroughs
+Bug bounty workflows
+Red-team tooling
+Cloud misconfiguration training
+Mobile applications
+
+High-Level Milestones
+
+Specification finalized and frozen
+First “gold-standard” AppSec lab implemented
+Lab evaluation engine completed
+End-to-end deployment via CI/CD
+Documentation and example labs published
+
+
+7. Success Criteria
+The project is successful if:
+
+Users can correctly identify vulnerable code patterns
+Users understand exploitability and impact without executing attacks
+Users learn correct remediation strategies
+New labs can be added without platform redesign
+The platform remains aligned with AppSec, not exploitation, goals
+
+
+8. Design Constraints & Non‑Goals (Hard Boundaries)
+This project will not:
+
+Teach attack payload construction
+Require interacting with real production-like services
+Simulate red-team engagements
+Drift into cloud or infrastructure security labs
+
+Any future enhancement must support application security learning.
+
+9. Versioning & Change Control
+
+This specification defines v1.0
+Any scope change requires:
+
+Explicit update to this document
+Review against stated objectives and non-goals
+
+
+
+
+Repository Recommendation
+/docs
+  ├── SPEC.md
+  ├── NON_GOALS.md
+  ├── ARCHITECTURE.md
+/labs
+  ├── sast/
+  ├── webapp/
